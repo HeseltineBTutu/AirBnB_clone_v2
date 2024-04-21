@@ -29,7 +29,9 @@ This script can also be used as a template for creating simple
 Flask applications.
 """
 
-from flask import Flask, escape
+from flask import Flask
+from markupsafe import escape
+
 
 app = Flask(__name__)
 
@@ -68,8 +70,7 @@ def c_message(text):
     Returns:
         str: The message "C " followed by the formatted 'text'.
     """
-    formatted_text = escape(text.replace('_', ' '))
-    return f"C {formatted_text}"
+    return "C {}".format(escape(text).replace('_', ' '))
 
 
 if __name__ == '__main__':
